@@ -1,0 +1,79 @@
+Docker commands:
+-------------------
+
+Navigate to the docker-compose.yaml file location and run the commands
+
+docker compose down  --shutdown composer
+docker system prune -f --clear resources
+docker compose pull   ---pull the image
+docker compose up -d  ---run the image
+
+
+docker compose ps --list composer images running
+---------------------------------------------------------------------------------------
+
+Install AWS CLI
+----------------
+Open the link and download:
+https://awscli.amazonaws.com/AWSCLIV2.msi
+
+
+run the following command in powershell
+curl "https://awscli.amazonaws.com/AWSCLIV2.msi" -o "AWSCLIV2.msi"
+msiexec /i AWSCLIV2.msi
+
+
+
+add to path (environment variables) - C:\Program Files\Amazon\AWSCLIV2\
+
+check in powershell/vs code terminal
+---------------------------------------
+aws --version
+
+aws configure
+
+AWS Access Key ID: test
+AWS Secret Access Key: test
+Default region: us-east-1
+Output format: json
+
+
+
+
+Airflow	http://localhost:8081
+Spark	http://localhost:8080
+Debezium	http://localhost:8083
+Kafka	localhost:9092
+Postgres	localhost:5432
+AWS health	http://localhost:4566/_localstack/health
+Pgadmin http://localhost:5050
+
+
+Run these to validate the AWS resources
+---------------------------------------
+aws --endpoint-url=http://localhost:4566 s3 mb s3://raw-events
+aws --endpoint-url=http://localhost:4566 s3 mb s3://processed-events
+
+aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name event-queue
+
+Check the resources
+--------------------
+aws --endpoint-url=http://localhost:4566 s3 ls
+aws --endpoint-url=http://localhost:4566 sqs list-queues
+
+
+Reconfigure if required:
+setx AWS_ACCESS_KEY_ID test
+setx AWS_SECRET_ACCESS_KEY test
+setx AWS_DEFAULT_REGION us-east-1
+
+
+
+Run these to check the db
+----------------------------
+
+docker exec -it aws-data-platform-postgres-1 psql -U de_user -d app_db
+
+
+\q --->exit from postgres
+
